@@ -1,127 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Happy Trails Durga Puja — Sponsorship</title>
 <style>
-:root{--red:#9d1c20;--gold:#d6a84f;--cream:#fffaf0;--ink:#33251e;--green:#176b4d}
-*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--ink)}
-.hero{background:linear-gradient(135deg,#761318,#b52a22);color:#fff;padding:34px 18px 28px;text-align:center}
-.hero .om{font-size:38px;color:#ffd978}.hero h1{margin:7px 0 4px;font-family:Georgia,serif;font-size:34px}.hero p{margin:0;opacity:.9}
-.container{max-width:1100px;margin:auto;padding:22px 16px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-8px}
-.card{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 18px #5a281020;border-top:4px solid var(--gold)}
-.label{font-size:13px;color:#78665b}.value{font-size:26px;font-weight:700;margin-top:7px;color:var(--red)}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 14px}
-input,select{padding:12px 14px;border:1px solid #dccfc2;border-radius:10px;background:#fff;font-size:15px;flex:1;min-width:180px}
-.table-wrap{overflow:auto;background:white;border-radius:16px;box-shadow:0 5px 18px #5a281015}
-table{width:100%;border-collapse:collapse;min-width:700px}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee}th{background:#fff3d7;color:#6b4b20;font-size:13px;text-transform:uppercase}tr:last-child td{border-bottom:0}
-.badge{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}.received{background:#def4e8;color:#176b4d}.pending{background:#fff0cf;color:#8b5a00}
-.note{background:#fff5df;border-left:4px solid var(--gold);padding:15px;border-radius:10px;margin-top:18px;font-size:14px}
-.footer{text-align:center;padding:28px 16px;color:#806e63;font-size:13px}
-@media(max-width:700px){.cards{grid-template-columns:1fr}.hero h1{font-size:28px}}
-</style>
-</head>
+:root{--red:#8e171d;--gold:#d39b32;--cream:#fffaf1;--ink:#30251f;--green:#176b4d;--line:#eadfce}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.hero{background:linear-gradient(135deg,#701016,#a92225);color:#fff;text-align:center;padding:30px 16px}.om{font:38px Georgia,serif;color:#ffd978}
+h1{font:700 32px Georgia,serif;margin:6px 0}.hero p{margin:0;opacity:.9}.container{max-width:1150px;margin:auto;padding:22px 14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#fff;border-radius:15px;padding:18px;box-shadow:0 4px 18px #00000012;border-top:4px solid var(--gold)}
+.label{font-size:13px;color:#75665d}.value{font-size:25px;font-weight:700;color:var(--red);margin-top:6px}
+.actions{text-align:center;margin:20px 0 8px}.actions a{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:13px 22px;border-radius:10px;font-weight:700}
+.live{text-align:center;font-size:13px;color:var(--green);margin:10px 0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+input,select{border:1px solid #d9ccbd;background:#fff;border-radius:10px;padding:12px 14px;font-size:15px;flex:1;min-width:190px}
+.table-wrap{background:#fff;border-radius:15px;overflow:auto;box-shadow:0 4px 18px #0000000d}table{border-collapse:collapse;width:100%;min-width:900px}
+th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#fff1d0;color:#694a18;font-size:12px;text-transform:uppercase}
+.section td{background:#e69138;color:#fff;font-weight:700;border-bottom-color:#d77f20}.special td{background:#d9ead3}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}.open{background:#def3e7;color:#176b4d}.closed{background:#ffe1e1;color:#9d1c20}
+.note{margin-top:16px;background:#fff5df;border-left:4px solid var(--gold);padding:13px;border-radius:9px;font-size:13px}.footer{text-align:center;padding:25px;color:#806f65;font-size:13px}
+@media(max-width:700px){.cards{grid-template-columns:1fr}h1{font-size:27px}}
+</style></head>
 <body>
-<header class="hero">
-  <div class="om">ॐ</div>
-  <h1>Happy Trails Durga Puja</h1>
-  <p>Sponsorship & Contribution Tracker • 2026</p>
-</header>
-
+<header class="hero"><div class="om">ॐ</div><h1>Happy Trails Durga Puja</h1><p>Sponsorship & Contribution Tracker • 2026</p></header>
 <main class="container">
-  <section class="cards">
-    <div class="card"><div class="label">Total Received</div><div class="value" id="received">₹0</div></div>
-    <div class="card"><div class="label">Total Committed</div><div class="value" id="committed">₹0</div></div>
-    <div class="card"><div class="label">Pending</div><div class="value" id="pending">₹0</div></div>
-  </section>
-
-  <div style="text-align:center;margin:20px 0 8px">
-    <a href="https://forms.gle/p815HuL5vY99qGqJ7" target="_blank" rel="noopener"
-       style="display:inline-block;background:#9d1c20;color:#fff;text-decoration:none;padding:13px 22px;border-radius:10px;font-weight:700;box-shadow:0 4px 12px #5a281025">
-       ➕ Submit Sponsorship Details
-    </a>
-    <div style="font-size:12px;color:#806e63;margin-top:8px">
-      Committee members can use the form above to submit/update sponsorship information.
-    </div>
-  </div>
-
-  <div class="toolbar">
-    <input id="search" placeholder="Search sponsor, flat or category…">
-    <select id="status"><option value="all">All Status</option><option value="Received">Received</option><option value="Pending">Pending</option></select>
-    <select id="category"><option value="all">All Categories</option></select>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Sponsor</th><th>Flat</th><th>Category / Program</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
-  </div>
-
-  <div class="note">
-    <strong>Transparency note:</strong> This page is intended for Happy Trails residents to view sponsorship commitments and payment status. For privacy, use the sponsor's name only with their consent; otherwise display Flat No. or “Resident”.
-  </div>
-</main>
-
-<footer class="footer">🙏 Thank you to all residents for supporting Happy Trails Durga Puja.</footer>
-
+<section class="cards">
+<div class="card"><div class="label">Total Received</div><div class="value" id="received">₹0</div></div>
+<div class="card"><div class="label">Total Budget</div><div class="value" id="budget">₹0</div></div>
+<div class="card"><div class="label">Open Sponsorships</div><div class="value" id="openCount">0</div></div>
+</section>
+<div class="actions"><a href="https://forms.gle/p815HuL5vY99qGqJ7" target="_blank" rel="noopener">➕ Submit Sponsorship / Contribution</a></div>
+<div class="live" id="live">● Connecting to Google Sheet…</div>
+<div class="toolbar"><input id="search" placeholder="Search sponsorship, resident or flat…">
+<select id="status"><option value="all">All Status</option><option value="Open">Open</option><option value="Closed">Closed</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Sponsorship Item</th><th>Minimum Contribution</th><th>Status</th><th>Received</th><th>Budget</th><th>Resident Details</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="note"><strong>Privacy:</strong> Phone numbers are hidden from this public page.</div>
+</main><footer class="footer">🙏 Thank you to all Happy Trails residents for supporting Durga Puja.</footer>
 <script>
-/* Sample data. The Google Form is linked above. For automatic live updates, connect the Form's response Sheet to this page in the next step. */
-const API_URL = "https://script.google.com/macros/s/AKfycbyK1cCcOhrL9TPK0bsmtjJymOv5za8oJhDnPup46L7Qzp7QX4LYZqnJW4p_2gaMlrm8WA/exec";
-let sponsorships = [];
-
-const money = n => "₹" + n.toLocaleString("en-IN");
-function parseAmount(value){
-  if (typeof value === "number") return value;
-  if (!value) return 0;
-  return Number(String(value).replace(/[^0-9.-]/g,"")) || 0;
-}
+const https://script.google.com/macros/s/AKfycbyK1cCcOhrL9TPK0bsmtjJymOv5za8oJhDnPup46L7Qzp7QX4LYZqnJW4p_2gaMlrm8WA/exec="https://script.google.com/macros/s/AKfycbyK1cCcOhrL9TPK0bsmtjJymOv5za8oJhDnPup46L7Qzp7QX4LYZqnJW4p_2gaMlrm8WA/exec";
+let allRows=[];
+function money(v){return "₹"+(Number(v)||0).toLocaleString("en-IN")}
+function amount(v){return typeof v==="number"?v:Number(String(v??"").replace(/[₹,\s]/g,"").replace(/[^0-9.-]/g,""))||0}
+function clean(v){return String(v??"").replace(/\b\d{10}\b/g,"[phone hidden]").replace(/\s*\n\s*/g,"<br>")}
+function isSection(r){return String(r[1]??"").trim() && !String(r[2]??"").trim() && !String(r[0]??"").trim()}
+function isSpecial(r){return String(r[1]??"").trim() && !isSection(r) && !String(r[2]??"").trim()}
 function render(){
-  const q=document.getElementById("search").value.toLowerCase();
-  const st=document.getElementById("status").value, cat=document.getElementById("category").value;
-  const data=sponsorships.filter(x =>
-    (st==="all"||x.status===st) && (cat==="all"||x.category===cat) &&
-    [x.sponsor,x.flat,x.category,x.details].join(" ").toLowerCase().includes(q)
-  );
-  const committed=sponsorships.reduce((a,x)=>a+x.budget,0);
-  const received=sponsorships.reduce((a,x)=>a+x.received,0);
-  document.getElementById("committed").textContent=money(committed);
-  document.getElementById("received").textContent=money(received);
-  document.getElementById("pending").textContent=money(Math.max(committed-received,0));
-  document.getElementById("rows").innerHTML=data.map(x=>`
-    <tr><td>${x.sponsor}</td><td>${x.flat||"—"}</td><td>${x.category}</td>
-    <td><strong>${money(x.minimum)}</strong></td>
-    <td><span class="badge ${x.status==="Received"?"received":"pending"}">${x.status==="Received"?"✓ ":""}${x.status}</span></td>
-    <td>${x.details||"—"}</td></tr>`).join("") || `<tr><td colspan="6" style="text-align:center;padding:28px">No records found.</td></tr>`;
+ const q=document.getElementById("search").value.toLowerCase(),st=document.getElementById("status").value;
+ const rows=allRows.filter(x=>(st==="all"||x.status===st)&&[x.item,x.details,x.serial].join(" ").toLowerCase().includes(q));
+ document.getElementById("received").textContent=money(allRows.reduce((s,x)=>s+x.received,0));
+ document.getElementById("budget").textContent=money(allRows.reduce((s,x)=>s+x.budget,0));
+ document.getElementById("openCount").textContent=allRows.filter(x=>x.kind==="item"&&x.status==="Open").length;
+ document.getElementById("rows").innerHTML=rows.map(x=>{
+  if(x.kind==="section")return `<tr class="section"><td colspan="6">${x.item}</td></tr>`;
+  return `<tr class="${x.special?"special":""}"><td><strong>${x.item}</strong></td><td>${x.minimum?money(x.minimum):"—"}</td><td><span class="badge ${x.status==="Closed"?"closed":"open"}">${x.status}</span></td><td>${x.received?money(x.received):"—"}</td><td>${x.budget?money(x.budget):"—"}</td><td>${x.details?clean(x.details):"—"}</td></tr>`;
+ }).join("")||'<tr><td colspan="6" style="text-align:center;padding:28px">No matching sponsorships found.</td></tr>';
 }
-async function loadSheet(){
-  const response=await fetch(API_URL,{cache:"no-store"});
-  if(!response.ok) throw new Error("Unable to read Google Sheet");
-  const rows=await response.json();
-  sponsorships=rows.slice(3).map(r=>{
-    const item=String(r[1]??"");
-    const minimum=parseAmount(r[2]);
-    const openClosed=String(r[3]??"").trim();
-    const received=parseAmount(r[4]);
-    const budget=parseAmount(r[5]);
-    const details=String(r[6]??"");
-    return {sponsor:item||"Puja Sponsorship",flat:"",category:item,minimum,received,budget,details,status:openClosed.toLowerCase().includes("closed")?"Pending":(received>0?"Received":"Pending")};
-  }).filter(x=>x.minimum>0||x.budget>0||x.received>0);
-  const select=document.getElementById("category");
-  select.innerHTML='<option value="all">All Categories</option>';
-  [...new Set(sponsorships.map(x=>x.category).filter(Boolean))].forEach(c=>{
-    const o=document.createElement("option"); o.value=c; o.textContent=c; select.appendChild(o);
-  });
-  render();
+function handleSheetData(payload){
+ const rows=payload.data||[];
+ allRows=rows.slice(2).map(r=>({kind:isSection(r)?"section":"item",special:isSpecial(r),serial:String(r[0]??"").trim(),item:String(r[1]??"").trim(),minimum:amount(r[2]),status:String(r[3]??"").trim()||"Open",received:amount(r[4]),budget:amount(r[5]),details:String(r[6]??"").trim()})).filter(x=>x.item);
+ document.getElementById("live").textContent="● Live data connected";render();
 }
-
-document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",render));
-loadSheet().catch(err=>{
-  document.getElementById("rows").innerHTML='<tr><td colspan="6" style="text-align:center;padding:28px">Unable to load live sponsorship data. Check that the Apps Script Web App is deployed for Anyone.</td></tr>';
-  console.error(err);
-});
-</script>
-</body>
-</html>
+function loadSheet(){
+ const s=document.createElement("script");s.src=https://script.google.com/macros/s/AKfycbyK1cCcOhrL9TPK0bsmtjJymOv5za8oJhDnPup46L7Qzp7QX4LYZqnJW4p_2gaMlrm8WA/exec+"?callback=handleSheetData&t="+Date.now();
+ s.onerror=()=>document.getElementById("live").textContent="● Unable to connect to Google Sheet";
+ document.body.appendChild(s);
+}
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",render));loadSheet();
+</script></body></html>
