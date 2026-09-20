@@ -79,7 +79,7 @@ function num(v){
  return Number.isFinite(n)?n:0;
 }
 function hidePhone(v){
- return String(v??"").replace(/(?:\+91[\s-]?)?\b\d{10}\b/g,"XXXXXXXXXX");
+ return String(v ?? "");
 }
 function esc(v){
  return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
