@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Trails Durga Puja — Sponsorship</title>
+<style>
+:root{--red:#9d1c20;--gold:#d6a84f;--cream:#fffaf0;--ink:#33251e;--green:#176b4d}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--ink)}
+.hero{background:linear-gradient(135deg,#761318,#b52a22);color:#fff;padding:34px 18px 28px;text-align:center}
+.hero .om{font-size:38px;color:#ffd978}.hero h1{margin:7px 0 4px;font-family:Georgia,serif;font-size:34px}.hero p{margin:0;opacity:.9}
+.container{max-width:1100px;margin:auto;padding:22px 16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-8px}
+.card{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 18px #5a281020;border-top:4px solid var(--gold)}
+.label{font-size:13px;color:#78665b}.value{font-size:26px;font-weight:700;margin-top:7px;color:var(--red)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 14px}
+input,select{padding:12px 14px;border:1px solid #dccfc2;border-radius:10px;background:#fff;font-size:15px;flex:1;min-width:180px}
+.table-wrap{overflow:auto;background:white;border-radius:16px;box-shadow:0 5px 18px #5a281015}
+table{width:100%;border-collapse:collapse;min-width:700px}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee}th{background:#fff3d7;color:#6b4b20;font-size:13px;text-transform:uppercase}tr:last-child td{border-bottom:0}
+.badge{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}.received{background:#def4e8;color:#176b4d}.pending{background:#fff0cf;color:#8b5a00}
+.note{background:#fff5df;border-left:4px solid var(--gold);padding:15px;border-radius:10px;margin-top:18px;font-size:14px}
+.footer{text-align:center;padding:28px 16px;color:#806e63;font-size:13px}
+@media(max-width:700px){.cards{grid-template-columns:1fr}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="om">ॐ</div>
+  <h1>Happy Trails Durga Puja</h1>
+  <p>Sponsorship & Contribution Tracker • 2026</p>
+</header>
+
+<main class="container">
+  <section class="cards">
+    <div class="card"><div class="label">Total Received</div><div class="value" id="received">₹0</div></div>
+    <div class="card"><div class="label">Total Committed</div><div class="value" id="committed">₹0</div></div>
+    <div class="card"><div class="label">Pending</div><div class="value" id="pending">₹0</div></div>
+  </section>
+
+  <div style="text-align:center;margin:20px 0 8px">
+    <a href="https://forms.gle/p815HuL5vY99qGqJ7" target="_blank" rel="noopener"
+       style="display:inline-block;background:#9d1c20;color:#fff;text-decoration:none;padding:13px 22px;border-radius:10px;font-weight:700;box-shadow:0 4px 12px #5a281025">
+       ➕ Submit Sponsorship Details
+    </a>
+    <div style="font-size:12px;color:#806e63;margin-top:8px">
+      Committee members can use the form above to submit/update sponsorship information.
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input id="search" placeholder="Search sponsor, flat or category…">
+    <select id="status"><option value="all">All Status</option><option value="Received">Received</option><option value="Pending">Pending</option></select>
+    <select id="category"><option value="all">All Categories</option></select>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sponsor</th><th>Flat</th><th>Category / Program</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Transparency note:</strong> This page is intended for Happy Trails residents to view sponsorship commitments and payment status. For privacy, use the sponsor's name only with their consent; otherwise display Flat No. or “Resident”.
+  </div>
+</main>
+
+<footer class="footer">🙏 Thank you to all residents for supporting Happy Trails Durga Puja.</footer>
+
+<script>
+/* Sample data. The Google Form is linked above. For automatic live updates, connect the Form's response Sheet to this page in the next step. */
+const API_URL = "https://script.google.com/macros/s/AKfycbyK1cCcOhrL9TPK0bsmtjJymOv5za8oJhDnPup46L7Qzp7QX4LYZqnJW4p_2gaMlrm8WA/exec";
+let sponsorships = [];
+
+const money = n => "₹" + n.toLocaleString("en-IN");
+function parseAmount(value){
+  if (typeof value === "number") return value;
+  if (!value) return 0;
+  return Number(String(value).replace(/[^0-9.-]/g,"")) || 0;
+}
+function render(){
+  const q=document.getElementById("search").value.toLowerCase();
+  const st=document.getElementById("status").value, cat=document.getElementById("category").value;
+  const data=sponsorships.filter(x =>
+    (st==="all"||x.status===st) && (cat==="all"||x.category===cat) &&
+    [x.sponsor,x.flat,x.category,x.details].join(" ").toLowerCase().includes(q)
+  );
+  const committed=sponsorships.reduce((a,x)=>a+x.budget,0);
+  const received=sponsorships.reduce((a,x)=>a+x.received,0);
+  document.getElementById("committed").textContent=money(committed);
+  document.getElementById("received").textContent=money(received);
+  document.getElementById("pending").textContent=money(Math.max(committed-received,0));
+  document.getElementById("rows").innerHTML=data.map(x=>`
+    <tr><td>${x.sponsor}</td><td>${x.flat||"—"}</td><td>${x.category}</td>
+    <td><strong>${money(x.minimum)}</strong></td>
+    <td><span class="badge ${x.status==="Received"?"received":"pending"}">${x.status==="Received"?"✓ ":""}${x.status}</span></td>
+    <td>${x.details||"—"}</td></tr>`).join("") || `<tr><td colspan="6" style="text-align:center;padding:28px">No records found.</td></tr>`;
+}
+async function loadSheet(){
+  const response=await fetch(API_URL,{cache:"no-store"});
+  if(!response.ok) throw new Error("Unable to read Google Sheet");
+  const rows=await response.json();
+  sponsorships=rows.slice(3).map(r=>{
+    const item=String(r[1]??"");
+    const minimum=parseAmount(r[2]);
+    const openClosed=String(r[3]??"").trim();
+    const received=parseAmount(r[4]);
+    const budget=parseAmount(r[5]);
+    const details=String(r[6]??"");
+    return {sponsor:item||"Puja Sponsorship",flat:"",category:item,minimum,received,budget,details,status:openClosed.toLowerCase().includes("closed")?"Pending":(received>0?"Received":"Pending")};
+  }).filter(x=>x.minimum>0||x.budget>0||x.received>0);
+  const select=document.getElementById("category");
+  select.innerHTML='<option value="all">All Categories</option>';
+  [...new Set(sponsorships.map(x=>x.category).filter(Boolean))].forEach(c=>{
+    const o=document.createElement("option"); o.value=c; o.textContent=c; select.appendChild(o);
+  });
+  render();
+}
+
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",render));
+loadSheet().catch(err=>{
+  document.getElementById("rows").innerHTML='<tr><td colspan="6" style="text-align:center;padding:28px">Unable to load live sponsorship data. Check that the Apps Script Web App is deployed for Anyone.</td></tr>';
+  console.error(err);
+});
+</script>
+</body>
+</html>
