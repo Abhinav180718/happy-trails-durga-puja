@@ -87,6 +87,14 @@ function esc(v){
 function sectionRow(r){return r&&r[1]&&!r[0]&&!r[2]}
 function itemRow(r){return r&&r[1]&&!sectionRow(r)&&String(r[1]).toLowerCase()!=="total"}
 
+function formatDate(v){
+ if(v===null||v===undefined||v==="") return "—";
+ if(v instanceof Date && !isNaN(v)) return v.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+ const s=String(v).trim();
+ const d=new Date(s);
+ if(!isNaN(d.getTime()) && /[-/]/.test(s)) return d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+ return s;
+}
 function render(){
  const q=document.getElementById("search").value.toLowerCase().trim();
  const filter=document.getElementById("statusFilter").value;
@@ -99,7 +107,7 @@ function render(){
  const html=groups.map(g=>{
    const items=g.items.filter(r=>{
      const status=String(r[3]||"").trim();
-     const text=[r[0],r[1],r[2],r[3],r[4],r[5],r[6]].join(" ").toLowerCase();
+     const text=[r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]].join(" ").toLowerCase();
      return (!q||text.includes(q))&&(filter==="all"||status===filter);
    });
    if(!items.length)return "";
@@ -107,7 +115,7 @@ function render(){
    items.forEach(r=>{if(String(r[3]).trim().toLowerCase()==="open")openCount++;received+=num(r[4]);budget+=num(r[5])});
    return `<section class="section"><div class="section-title">${esc(g.title)}</div>
    <div class="table-wrap"><table><thead><tr>
-   <th>#</th><th>Sponsorship</th><th>Minimum Contribution</th><th>Status</th><th>Received</th><th>Budget</th><th>Resident Details</th>
+   <th>#</th><th>Sponsorship</th><th>Minimum Contribution</th><th>Status</th><th>Received</th><th>Budget</th><th>Resident Details</th><th>Transaction Date</th>
    </tr></thead><tbody>${
      items.map(r=>{
        const status=String(r[3]||"").trim();
@@ -120,6 +128,7 @@ function render(){
        <td>${r[4]!==""?money(r[4]):"—"}</td>
        <td>${r[5]!==""?money(r[5]):"—"}</td>
        <td>${esc(hidePhone(r[6]||"")).replace(/\n/g,"<br>")||"—"}</td>
+       <td>${formatDate(r[7])}</td>
        </tr>`;
      }).join("")
    }</tbody></table></div></section>`;
